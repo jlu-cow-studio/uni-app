@@ -1,0 +1,195 @@
+<!--这个版本将select框直接写死在页面上-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三级联动</title>
+    <style>
+        select {
+            width: 120px;
+            height: 30px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        input {
+            width: 200px;
+            height: 30px;
+            padding-left: 5px;
+            border-radius: 4px;
+            border: 1px solid #dddddd;
+        }
+    </style>
+
+    <script src="address_level3.js"></script>
+    <script>
+        window.onload = function () {
+            // console.log(addressData);
+            var province = document.getElementById("province");
+            var city = document.getElementById("city");
+            var area = document.getElementById("area");
+
+            province.options[0] = new Option("请选择省", "-1");
+            city.options[0] = new Option("请选择市", "-1");
+            area.options[0] = new Option("请选择区", "-1");
+            //创建省市区完毕
+
+            //循环第一步
+            for (var i = 0; i < addressData.length; i++) {
+                // console.log(province.length);
+                province.options[province.length] = new Option(addressData[i].label, addressData[i].value);
+                province.onchange = function () {
+                    //恢复默认选项
+                    //city.options[0].selected = true;
+                    //area.options[0].selected = true;
+                    //清空市区选项
+                    city.options.length = 0;
+                    city.options[city.length] = new Option("请选择市", "-1");
+                    area.options.length = 0;
+                    area.options[area.length] = new Option("请选择区", "-1");
+                    for (var j = 0; j < addressData[province.selectedIndex - 1].children.length; j++) {
+                        city.options[city.length] =
+                            new Option(addressData[province.selectedIndex - 1].children[j].label,
+                                addressData[province.selectedIndex - 1].children[j].value);
+                        city.onchange = function () {
+                            //恢复默认选项
+                            //area.options[0].selected = true;
+                            //清空区选项
+                            area.options.length = 0;
+                            area.options[area.length] = new Option("请选择区", "-1");
+                            for (var k = 0; k < addressData[province.selectedIndex - 1].
+                                children[city.selectedIndex - 1].children.length; k++) {
+                                area.options[area.length] =
+                                    new Option(addressData[province.selectedIndex - 1].
+                                        children[city.selectedIndex - 1].children[k].label,
+                                        addressData[province.selectedIndex - 1].
+                                            children[city.selectedIndex - 1].children[k].value);
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        function printAdd() {
+            var province1 = document.getElementById("province").value;
+            var city1 = document.getElementById("city").value;
+            var area1 = document.getElementById("area").value;
+            /*打印地址code*/
+            document.getElementById("currentAddCode").innerText = province1+""+city1+area1;
+
+            /*打印地址文字*/
+            var provinceIndex = document.getElementById("province").selectedIndex;
+            var cityIndex = document.getElementById("city").selectedIndex;
+            var areaIndex = document.getElementById("area").selectedIndex;
+            document.getElementById("currentAdd").innerText = ""+
+                document.getElementById("province").options[provinceIndex].text +
+                document.getElementById("city").options[cityIndex].text +
+                document.getElementById("area").options[areaIndex].text;
+        }
+
+        /*编辑地址*/
+        function editAdd() {
+            var addString = document.getElementById('addInput').value;
+            console.log(addString);
+            if ( addString != null && addString != undefined && addString != "" ) {
+                var addStrings = addString.split("/");
+
+                var province = document.getElementById("province");
+                var city = document.getElementById("city");
+                var area = document.getElementById("area");
+
+                for (var i=1; i<province.options.length; i++) {
+                    if(province.options[i].text==addStrings[0]){
+                        province.options[i].selected = true;
+                    }
+                }
+                /*添加这个市下面的城市option*/
+                city.options.length = 0;
+                city.options[city.length] = new Option("请选择市", "-1");
+                area.options.length = 0;
+                area.options[area.length] = new Option("请选择区", "-1");
+                for (var j = 0; j < addressData[province.selectedIndex - 1].children.length; j++) {
+                    city.options[city.length] =
+                        new Option(addressData[province.selectedIndex - 1].children[j].label,
+                            addressData[province.selectedIndex - 1].children[j].value);
+                }
+                /*找市*/
+                for (var k=1; k<city.options.length; k++) {
+                    if(city.options[k].text==addStrings[1]){
+                        city.options[k].selected = true;
+                    }
+                }
+                /*添加这个市下面的区option*/
+                area.options.length = 0;
+                area.options[area.length] = new Option("请选择区", "-1");
+                for (var k = 0; k < addressData[province.selectedIndex - 1].
+                    children[city.selectedIndex - 1].children.length; k++) {
+                    area.options[area.length] =
+                        new Option(addressData[province.selectedIndex - 1].
+                                children[city.selectedIndex - 1].children[k].label,
+                            addressData[province.selectedIndex - 1].
+                                children[city.selectedIndex - 1].children[k].value);
+
+                }
+                /*找区*/
+                for (var k=1; k<area.options.length; k++) {
+                    if(area.options[k].text==addStrings[2]){
+                        area.options[k].selected = true;
+                    }
+                }
+                /*城市切换时的引起区option的重新获取*/
+                cityChange();
+            }
+        }
+
+        /*城市切换函数*/
+        function cityChange() {
+            city.onchange = function () {
+                //恢复默认选项
+                //area.options[0].selected = true;
+                //清空区选项
+                area.options.length = 0;
+                area.options[area.length] = new Option("请选择区", "-1");
+                for (var k = 0; k < addressData[province.selectedIndex - 1].
+                    children[city.selectedIndex - 1].children.length; k++) {
+                    area.options[area.length] =
+                        new Option(addressData[province.selectedIndex - 1].
+                                children[city.selectedIndex - 1].children[k].label,
+                            addressData[province.selectedIndex - 1].
+                                children[city.selectedIndex - 1].children[k].value);
+
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="div">
+    <input type="text" id="addInput">
+    <br><br>
+    <button onclick="editAdd()">编辑地址</button>
+    <br><br>
+
+    <select name="" id="province"></select>
+    <select name="" id="city"></select>
+    <select name="" id="area"></select>
+
+    <button onclick="printAdd()">打印地址</button>
+    <br><br>
+    <div>
+        <div>
+            当前选择的地址为：
+            <span id="currentAdd"></span>
+        </div>
+
+        <br>
+        <div>
+            当前选择的地址码为：
+            <span id="currentAddCode"></span>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

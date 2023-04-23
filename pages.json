@@ -1,0 +1,196 @@
+{
+  "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "主页"
+      }
+    },
+    {
+      "path": "pages/beef/beef",
+      "style": {
+        "navigationBarTitleText": "牛肉交易",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/shop/shop",
+      "style": {
+        "navigationBarTitleText": "服务商店",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/information/information",
+      "style": {
+        "navigationBarTitleText": "专业信息",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "compontents/details/details",
+      "style": {
+        "navigationStyle": "custom",
+        "app-plus": {
+          "titleNView": false //去掉app+h5顶部导航
+        }
+      }
+
+    }, {
+      "path": "compontents/produc-cart/produc-cart",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "compontents/play/play",
+      "style": {
+        "navigationStyle": "custom",
+        "app-plus": {
+          "titleNView": false //去掉app+h5顶部导航
+        }
+      }
+
+    }, {
+      "path": "compontents/consult/consult",
+      "style": {
+        "navigationStyle": "custom",
+        "app-plus": {
+          "titleNView": false //去掉app+h5顶部导航
+        }
+      }
+
+    }, {
+      "path": "compontents/myCare/myCare",
+      "style": {
+        "navigationBarTitleText": "我的关注",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "compontents/myLike/myLike",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "compontents/myInterest/myInterest",
+      "style": {
+        "navigationBarTitleText": "兴趣管理",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "compontents/myBuy/myBuy",
+      "style": {
+        "navigationBarTitleText": "虚拟充值",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "compontents/pubGoods/pubGoods",
+      "style": {
+        "navigationBarTitleText": "发布商品",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "compontents/updateGoods/updateGoods",
+      "style": {
+        "navigationBarTitleText": "发布商品",
+        "enablePullDownRefresh": false
+      }
+
+    }, {
+      "path": "compontents/order/order",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "compontents/sureRole/sureRole",
+      "style": {
+        "navigationBarTitleText": "身份认证",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "compontents/setting/setting",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "compontents/open/open",
+      "style": {
+        "navigationBarTitleText": "开启直播",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "compontents/pubOrder/pubOrder",
+      "style": {
+        "navigationBarTitleText": "发布预约",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "compontents/myOrder/myOrder",
+      "style": {
+        "navigationBarTitleText": "我的预约",
+        "enablePullDownRefresh": false
+      }
+    }, {
+      "path": "pages/login/login",
+      "style": {
+        "app-plus": {
+          "titleNView": false
+        }
+      }
+
+    }
+      ,{
+            "path" : "compontents/pubArticle/pubArticle",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布推文",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+  "tabBar": {
+    "color": "#333333", // tab 上的文字默认颜色
+    "selectedColor": "#02A7F0", // tab 上的文字选中时的颜色
+    "borderStyle": "black", // tabbar 上边框的颜色，可选值 black/white
+    "backgroundColor": "#ffffff", // tab 的背景色
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "主页"
+    }, {
+      "pagePath": "pages/beef/beef",
+      "text": "牛肉交易"
+    }, {
+      "pagePath": "pages/shop/shop",
+      "text": "服务商店"
+    }, {
+      "pagePath": "pages/information/information",
+      "text": "专业信息"
+    }, {
+      "pagePath": "pages/my/my",
+      "text": "个人中心"
+    }]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "主页",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f0f0f0"
+  }
+}

@@ -1,0 +1,78 @@
+<!--这个版本将select框直接写死在页面上-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三级联动</title>
+    <style>
+        select {
+            width: 120px;
+            height: 30px;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+    </style>
+    <script src="address_level3.js"></script>
+    <script>
+        window.onload = function () {
+            // console.log(addressData);
+            var sheng = document.getElementById("sheng");
+            var shi = document.getElementById("shi");
+            var qu = document.getElementById("qu");
+
+            sheng.options[0] = new Option("请选择省", "-1");
+            shi.options[0] = new Option("请选择市", "-1");
+            qu.options[0] = new Option("请选择区", "-1");
+            //创建省市区完毕
+
+            //循环第一步
+            for (var i = 0; i < addressData.length; i++) {
+                // console.log(sheng.length);
+                sheng.options[sheng.length] = new Option(addressData[i].label, addressData[i].value);
+                sheng.onchange = function () {
+                    //恢复默认选项
+                    //shi.options[0].selected = true;
+                    //qu.options[0].selected = true;
+                    //清空市区选项
+                    shi.options.length = 0;
+                    shi.options[shi.length] = new Option("请选择市", "-1");
+                    qu.options.length = 0;
+                    qu.options[qu.length] = new Option("请选择区", "-1");
+                    for (var j = 0; j < addressData[sheng.selectedIndex - 1].children.length; j++) {
+                        shi.options[shi.length] =
+                            new Option(addressData[sheng.selectedIndex - 1].children[j].label,
+                                addressData[sheng.selectedIndex - 1].children[j].value);
+                        shi.onchange = function () {
+                            //恢复默认选项
+                            //qu.options[0].selected = true;
+                            //清空区选项
+                            qu.options.length = 0;
+                            qu.options[qu.length] = new Option("请选择区", "-1");
+                            for (var k = 0; k < addressData[sheng.selectedIndex - 1].
+                                children[shi.selectedIndex - 1].children.length; k++) {
+                                qu.options[qu.length] =
+                                    new Option(addressData[sheng.selectedIndex - 1].
+                                        children[shi.selectedIndex - 1].children[k].label,
+                                        addressData[sheng.selectedIndex - 1].
+                                            children[shi.selectedIndex - 1].children[k].value);
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div id="div">
+    <select name="" id="sheng"></select>
+    <select name="" id="shi"></select>
+    <select name="" id="qu"></select>
+
+</div>
+</body>
+
+</html>
